@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="calendar_right_margin">8dp</dimen>
+    <dimen name="calendar_left_margin">8dp</dimen>
+    <dimen name="calendar_top_margin">8dp</dimen>
+    <dimen name="calendar_header_height">42dp</dimen>
+    <dimen name="calendar_arrow_height">32dp</dimen>
+    <dimen name="calendar_arrow_width">32dp</dimen>
+    <dimen name="calendar_dayd_right_padding">16dp</dimen>
+    <dimen name="calendar_days_left_padding">16dp</dimen>
+    <dimen name="calendar_days_bottom_padding">16dp</dimen>
+    <dimen name="calendar_days_seperator_top_margin">4dp</dimen>
+    <dimen name="calendar_days_seperator_bottom_margin">4dp</dimen>
+
+</resources>

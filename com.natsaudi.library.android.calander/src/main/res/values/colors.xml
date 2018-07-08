@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="calendar_header_title">#FFFFFF</color>
+    <color name="disable_date_color">#EBECEC</color>
+    <color name="available_day_color">#9B9D9F</color>
+    <color name="header">#EB943E</color>
+    <color name="selected_date">#EB943E</color>
+    <color name="calendar_bg">#FFFFFF</color>
+</resources>
