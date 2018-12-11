@@ -33,6 +33,16 @@ public class PropertySetters {
     private int lineLeftMargin;
     private int lineRightMargin;
 
+    private String selectedDayColor;
+
+    public String getSelectedDayColor() {
+        return selectedDayColor;
+    }
+
+    public void setSelectedDayColor(String selectedDayColor) {
+        this.selectedDayColor = selectedDayColor;
+    }
+
     public int getLineTopMargin() {
         return lineTopMargin;
     }

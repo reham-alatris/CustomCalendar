@@ -127,7 +127,7 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.MyViewHolder> 
                 }
             });
             if (position == row_index && isClicked) {
-                holder.day_value.setTextColor(Color.parseColor("#EB943E"));
+                holder.day_value.setTextColor(Color.parseColor(propertySetters.getSelectedDayColor()));
 
 
             } else {
