@@ -2,12 +2,19 @@ package com.example.nat_developer_1.demo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.comnatsaudilibraryandroidcalander.CustomCalendarView;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private CustomCalendarView custom;
-    int []DecDisableDays=new int[]{3,4,5,6};
+    int[] DecDisableDays = new int[]{3, 4, 5, 6};
+    List<Integer> offDays = new ArrayList<>();
 
 
     @Override
@@ -16,16 +23,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         custom = (CustomCalendarView) findViewById(R.id.custom);
-//        custom.getPropertySetters().setInflatedMonths(3);
-//        custom.montsViewPagerAdapter.notifyDataSetChanged();
-//        custom.getPropertySetters().setArabicSupport(false);
-//        custom.setRotationY(0);
-//        custom.getPropertySetters().setCalendar_header_title_size(20);
-//        custom.getPropertySetters().setCalendar_header_height(40);
-//        custom.getPropertySetters().setDECdays(DecDisableDays);
+        custom.getPropertySetters().setFriOff(true);
+         custom.getPropertySetters().setSatOff(true);
 
+        //    custom.getPropertySetters().setSunOff(true);
 
-
-
+        custom.getPropertySetters().setSeperatorColor("#FFFFFF");
+        custom.getPropertySetters().setCalendarContainerHeight(300);
+        custom.getPropertySetters().setWeekColor("#FFFFFF");
+        custom.montsViewPagerAdapter.notifyDataSetChanged();
+        custom.getPropertySetters().setDaysLeftPadding(50);
     }
 }

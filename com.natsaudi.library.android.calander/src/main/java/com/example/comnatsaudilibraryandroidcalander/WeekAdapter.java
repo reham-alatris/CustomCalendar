@@ -17,6 +17,7 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.MyViewHolder> 
     Typeface typeface;
     String fontPath = "roboto_regular.ttf";
     PropertySetters propertySetters;
+    String weekColor="";
 
 
     public WeekAdapter(Context mContext, java.util.List<DayModel> words, PropertySetters propertySetters) {
@@ -73,15 +74,13 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.MyViewHolder> 
             holder.day_value.setTypeface(typeface);
         }
 
-
-        if (propertySetters.getDay_available_text_color().isEmpty()) {
+        weekColor=propertySetters.getWeekColor();
+        if (weekColor.isEmpty()) {
             holder.day_value.setTextColor(Color.parseColor("#9B9D9F"));
         } else {
-            holder.day_value.setTextColor(Color.parseColor(propertySetters.getDay_available_text_color()));
+            holder.day_value.setTextColor(Color.parseColor(propertySetters.getWeekColor()));
         }
     }
-
-
     @Override
     public int getItemCount() {
         return List.size();

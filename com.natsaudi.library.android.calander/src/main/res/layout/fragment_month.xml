@@ -67,6 +67,7 @@
             android:layout_height="1dp"
             android:layout_marginBottom="@dimen/calendar_days_seperator_bottom_margin"
             android:layout_marginTop="@dimen/calendar_days_seperator_top_margin"
+            android:id="@+id/seperator_color"
             android:background="@color/available_day_color" />
 
         <android.support.v7.widget.RecyclerView

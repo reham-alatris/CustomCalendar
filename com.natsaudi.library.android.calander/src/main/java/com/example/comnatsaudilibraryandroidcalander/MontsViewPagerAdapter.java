@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class MontsViewPagerAdapter extends PagerAdapter {
@@ -40,6 +42,12 @@ public class MontsViewPagerAdapter extends PagerAdapter {
     RecyclerView WeekrecyclerView;
     public WeekAdapter weekAdapter;
     private List<DayModel> weekModelList;
+    private View seperatorColor;
+    private int weekRightPadding = 0;
+    private int weekLeftPadding = 0;
+    private int daysLeftPadding = 0;
+    private int daysRightPadding = 0;
+    int year;
 
 
     public void setListener(Listener listener) {
@@ -56,7 +64,7 @@ public class MontsViewPagerAdapter extends PagerAdapter {
     private int getInflatedFragments() {
         Calendar c = Calendar.getInstance();
         int currentMonth = c.get(Calendar.MONTH);
-        int inflatedFraments = 12 - currentMonth;
+        int inflatedFraments = (12 - currentMonth) + 12;
         return inflatedFraments;
     }
 
@@ -102,6 +110,40 @@ public class MontsViewPagerAdapter extends PagerAdapter {
         next = (ImageView) itemView.findViewById(R.id.next_arrow_natsaudi);
         previous = (ImageView) itemView.findViewById(R.id.previous_arrow_natsaudi);
         WeekrecyclerView = (RecyclerView) itemView.findViewById(R.id.week_recycler_view_natsaudi);
+        seperatorColor = (View) itemView.findViewById(R.id.seperator_color);
+
+
+        //setting padding for week recycler
+
+        if (propertySetters.getWeekLeftPadding() != 0) {
+            int paddingPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, propertySetters.getWeekLeftPadding(), mContext.getResources().getDisplayMetrics());
+            WeekrecyclerView.setPadding(paddingPx, WeekrecyclerView.getPaddingTop(), paddingPx, WeekrecyclerView.getPaddingBottom());
+
+        }
+
+        //setting padding for days recycler
+
+        if (propertySetters.getDaysLeftPadding() != 0) {
+            int paddingPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, propertySetters.getDaysLeftPadding(), mContext.getResources().getDisplayMetrics());
+            recyclerView.setPadding(paddingPx, WeekrecyclerView.getPaddingTop(), paddingPx, WeekrecyclerView.getPaddingBottom());
+
+        }
+
+
+        //set color of seperator line
+        if (!propertySetters.getSeperatorColor().isEmpty()) {
+            seperatorColor.setBackgroundColor(Color.parseColor(propertySetters.getSeperatorColor()));
+        }
+
+
+        //setting calendar container height
+        if (propertySetters.getCalendarContainerHeight() != 0) {
+
+            int dimensionhInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, propertySetters.getCalendarContainerHeight(), mContext.getResources().getDisplayMetrics());
+
+            root_container_layout.getLayoutParams().height = dimensionhInDp;
+            root_container_layout.requestLayout();
+        }
 
 
         //setRotation of views
@@ -165,7 +207,7 @@ public class MontsViewPagerAdapter extends PagerAdapter {
         /*setting disable days in each month
          */
 
-        int[] disableDays = getDisableDays(getDays(position), position);
+        int[] disableDays = getDisableDays(getDays(position), position, propertySetters.getYear());
 
         if (disableDays != null) {
 
@@ -177,6 +219,17 @@ public class MontsViewPagerAdapter extends PagerAdapter {
                 }
             }
         }
+        if (position <= 11) {
+            Calendar calendar = Calendar.getInstance();
+            year = calendar.get(Calendar.YEAR);
+        } else {
+            Calendar calendar = Calendar.getInstance();
+            year = calendar.get(Calendar.YEAR) + 1;
+        }
+        int mm = getDays(position);
+        Log.d("month year", String.valueOf(year) + String.valueOf(mm));
+
+        getDisableDaysInEachWeek(getDays(position) - 1, year);
 
 
         /*
@@ -239,11 +292,17 @@ public class MontsViewPagerAdapter extends PagerAdapter {
     }
 
     private int getDays(int monthPosition) {
-        Calendar c = Calendar.getInstance();
-        int currentMonth = c.get(Calendar.MONTH);
-        int startMonth = currentMonth + 1;
-        int monthNo = startMonth + monthPosition;
+        int monthNo = 0;
+        if (monthPosition <= 11) {
+            Calendar c = Calendar.getInstance();
+            int currentMonth = c.get(Calendar.MONTH);
+            int startMonth = currentMonth + 1;
+            monthNo = startMonth + monthPosition;
+        } else {
+            monthNo=(monthPosition+1)-12;
+        }
         return monthNo;
+
     }
 
     @Override
@@ -258,50 +317,62 @@ public class MontsViewPagerAdapter extends PagerAdapter {
     private String getsMonthNameE(int position) {
         switch (getDays(position)) {
             case 1:
+            case 13:
                 sMonthName = "January";
                 break;
             case 2:
+            case 14:
                 sMonthName = "February";
                 break;
 
             case 3:
+            case 15:
                 sMonthName = "March";
                 break;
 
             case 4:
+            case 16:
                 sMonthName = "April";
                 break;
 
             case 5:
+            case 17:
                 sMonthName = "May";
                 break;
 
             case 6:
+            case 18:
                 sMonthName = "June";
                 break;
 
             case 7:
+            case 19:
                 sMonthName = "July";
                 break;
 
             case 8:
+            case 20:
                 sMonthName = "August";
                 break;
 
             case 9:
+            case 21:
                 sMonthName = "September";
                 break;
 
             case 10:
+            case 22:
                 sMonthName = "October";
                 break;
 
 
             case 11:
+            case 23:
                 sMonthName = "November";
                 break;
 
             case 12:
+            case 24:
                 sMonthName = "December";
                 break;
 
@@ -312,62 +383,114 @@ public class MontsViewPagerAdapter extends PagerAdapter {
         return sMonthName;
     }
 
-    private int[] getDisableDays(int month, int position) {
+    private int[] getDisableDays(int month, int position, int year) {
+        Calendar calendar = Calendar.getInstance();
+        int current_year = calendar.get(Calendar.YEAR);
         month = getDays(position);
         int[] disable_days_array = new int[0];
-        switch (month) {
-            case 1:
-                disable_days_array = propertySetters.getJANdays();
-                break;
+        if (year == current_year) {
+            switch (month) {
+                case 1:
+                    disable_days_array = propertySetters.getJANdays();
+                    break;
 
-            case 2:
-                disable_days_array = propertySetters.getFEBdays();
-                break;
+                case 2:
+                    disable_days_array = propertySetters.getFEBdays();
+                    break;
 
-            case 3:
-                disable_days_array = propertySetters.getMARday();
-                break;
+                case 3:
+                    disable_days_array = propertySetters.getMARday();
+                    break;
 
-            case 4:
-                disable_days_array = propertySetters.getAPRdays();
-                break;
+                case 4:
+                    disable_days_array = propertySetters.getAPRdays();
+                    break;
 
-            case 5:
-                disable_days_array = propertySetters.getMAYdays();
-                break;
+                case 5:
+                    disable_days_array = propertySetters.getMAYdays();
+                    break;
 
-            case 6:
-                disable_days_array = propertySetters.getJUNdays();
-                break;
+                case 6:
+                    disable_days_array = propertySetters.getJUNdays();
+                    break;
 
-            case 7:
-                disable_days_array = propertySetters.getJULdays();
-                break;
+                case 7:
+                    disable_days_array = propertySetters.getJULdays();
+                    break;
 
-            case 8:
-                disable_days_array = propertySetters.getAUGdays();
-                break;
+                case 8:
+                    disable_days_array = propertySetters.getAUGdays();
+                    break;
 
-            case 9:
-                disable_days_array = propertySetters.getSEPdays();
-                break;
+                case 9:
+                    disable_days_array = propertySetters.getSEPdays();
+                    break;
 
-            case 10:
-                disable_days_array = propertySetters.getOCTdays();
-                break;
+                case 10:
+                    disable_days_array = propertySetters.getOCTdays();
+                    break;
 
-            case 11:
-                disable_days_array = propertySetters.getNOVdays();
-                break;
+                case 11:
+                    disable_days_array = propertySetters.getNOVdays();
+                    break;
 
-            case 12:
-                disable_days_array = propertySetters.getDECdays();
-                break;
+                case 12:
+                    disable_days_array = propertySetters.getDECdays();
+                    break;
 
+            }
+        } else if (year == (current_year + 1)) {
+            switch (month) {
+                case 13:
+                    disable_days_array = propertySetters.getJANdays();
+                    break;
+
+                case 14:
+                    disable_days_array = propertySetters.getFEBdays();
+                    break;
+
+                case 15:
+                    disable_days_array = propertySetters.getMARday();
+                    break;
+
+                case 16:
+                    disable_days_array = propertySetters.getAPRdays();
+                    break;
+
+                case 17:
+                    disable_days_array = propertySetters.getMAYdays();
+                    break;
+
+                case 18:
+                    disable_days_array = propertySetters.getJUNdays();
+                    break;
+
+                case 19:
+                    disable_days_array = propertySetters.getJULdays();
+                    break;
+
+                case 20:
+                    disable_days_array = propertySetters.getAUGdays();
+                    break;
+
+                case 21:
+                    disable_days_array = propertySetters.getSEPdays();
+                    break;
+
+                case 22:
+                    disable_days_array = propertySetters.getOCTdays();
+                    break;
+
+                case 23:
+                    disable_days_array = propertySetters.getNOVdays();
+                    break;
+
+                case 24:
+                    disable_days_array = propertySetters.getDECdays();
+                    break;
+            }
         }
-
         return disable_days_array;
-
     }
 
 
@@ -409,64 +532,70 @@ public class MontsViewPagerAdapter extends PagerAdapter {
         arabicDays.add("٢٩");
         arabicDays.add("٣٠");
         arabicDays.add("٣١");
-
-
     }
 
     private String getsMonthNameA(int position) {
         switch (getDays(position)) {
             case 1:
+            case 13:
                 sMonthName = "يناير";
                 break;
             case 2:
+            case 14:
                 sMonthName = "فبراير";
                 break;
 
             case 3:
+            case 15:
                 sMonthName = "مارس";
                 break;
 
             case 4:
+            case 16:
                 sMonthName = "أبريل";
                 break;
 
             case 5:
+            case 17:
                 sMonthName = "مايو";
                 break;
 
             case 6:
+            case 18:
                 sMonthName = "يونيو";
                 break;
 
             case 7:
+            case 19:
                 sMonthName = "يوليو";
                 break;
 
             case 8:
+            case 20:
                 sMonthName = "أغسطس";
                 break;
 
             case 9:
+            case 21:
                 sMonthName = "ستمبر";
                 break;
 
             case 10:
+            case 22:
                 sMonthName = "اكتوبر";
                 break;
 
 
             case 11:
+            case 23:
                 sMonthName = "نوفمبر";
                 break;
 
             case 12:
+            case 24:
                 sMonthName = "ديسمبر";
                 break;
-
-
         }
-
-
         return sMonthName;
     }
 
@@ -506,5 +635,113 @@ public class MontsViewPagerAdapter extends PagerAdapter {
         weekModelList.add(new DayModel("ج", "f"));
         weekAdapter.notifyDataSetChanged();
 
+    }
+
+    public void getDisableDaysInEachWeek(int month, int year) {
+
+        Calendar cal = new GregorianCalendar(year, month, 1);
+
+
+        if (propertySetters.isSunOff()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.SUNDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+            Log.d("sun", "sun");
+
+
+        }
+        if (propertySetters.isSatOff()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.SATURDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+            Log.d("sat", "sat");
+
+        }
+        if (propertySetters.isMonOff()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.MONDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+            Log.d("mon", "mon");
+
+        }
+        if (propertySetters.isTuesOff()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.TUESDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+            Log.d("tues", "tues");
+
+        }
+        if (propertySetters.isWendOff()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.WEDNESDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+        }
+        if (propertySetters.isThOff()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.THURSDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+        }
+        if (propertySetters.isFriOff()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.FRIDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+        }
+        daysAdapter.notifyDataSetChanged();
     }
 }

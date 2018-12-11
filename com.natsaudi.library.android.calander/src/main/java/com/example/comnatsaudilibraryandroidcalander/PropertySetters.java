@@ -20,6 +20,70 @@ public class PropertySetters {
     private String calendar_header_title_color;
     private float calendar_header_title_size = 0;
     private int calendar_header_height;
+    private String seperatorColor;
+    private String weekColor;
+    private int calendarContainerHeight;
+    private int weekRightPadding;
+    private int weekLeftPadding;
+    private int daysLeftPadding;
+    private int daysRightPadding;
+
+    public int getWeekRightPadding() {
+        return weekRightPadding;
+    }
+
+    public void setWeekRightPadding(int weekRightPadding) {
+        this.weekRightPadding = weekRightPadding;
+    }
+
+    public int getWeekLeftPadding() {
+        return weekLeftPadding;
+    }
+
+    public void setWeekLeftPadding(int weekLeftPadding) {
+        this.weekLeftPadding = weekLeftPadding;
+    }
+
+    public int getDaysLeftPadding() {
+        return daysLeftPadding;
+    }
+
+    public void setDaysLeftPadding(int daysLeftPadding) {
+        this.daysLeftPadding = daysLeftPadding;
+    }
+
+    public int getDaysRightPadding() {
+        return daysRightPadding;
+    }
+
+    public void setDaysRightPadding(int daysRightPadding) {
+        this.daysRightPadding = daysRightPadding;
+    }
+
+    public int getCalendarContainerHeight() {
+        return calendarContainerHeight;
+    }
+
+    public void setCalendarContainerHeight(int calendarContainerHeight) {
+        this.calendarContainerHeight = calendarContainerHeight;
+    }
+
+    public String getWeekColor() {
+        return weekColor;
+    }
+
+    public void setWeekColor(String weekColor) {
+        this.weekColor = weekColor;
+    }
+
+    public String getSeperatorColor() {
+        return seperatorColor;
+    }
+
+    public void setSeperatorColor(String seperatorColor) {
+        this.seperatorColor = seperatorColor;
+    }
+
     //disable array of days for each month of year
     private int[] JANdays;
     private int[] FEBdays;
@@ -38,6 +102,78 @@ public class PropertySetters {
     private int selectedMonth;
     //no of inflated months;
     private int inflatedMonths;
+    private int year;
+    boolean satOff;
+    boolean sunOff;
+    boolean monOff;
+    boolean tuesOff;
+    boolean wendOff;
+    boolean thOff;
+    boolean friOff;
+
+    public boolean isSatOff() {
+        return satOff;
+    }
+
+    public void setSatOff(boolean satOff) {
+        this.satOff = satOff;
+    }
+
+    public boolean isSunOff() {
+        return sunOff;
+    }
+
+    public void setSunOff(boolean sunOff) {
+        this.sunOff = sunOff;
+    }
+
+    public boolean isMonOff() {
+        return monOff;
+    }
+
+    public void setMonOff(boolean monOff) {
+        this.monOff = monOff;
+    }
+
+    public boolean isTuesOff() {
+        return tuesOff;
+    }
+
+    public void setTuesOff(boolean tuesOff) {
+        this.tuesOff = tuesOff;
+    }
+
+    public boolean isWendOff() {
+        return wendOff;
+    }
+
+    public void setWendOff(boolean wendOff) {
+        this.wendOff = wendOff;
+    }
+
+    public boolean isThOff() {
+        return thOff;
+    }
+
+    public void setThOff(boolean thOff) {
+        this.thOff = thOff;
+    }
+
+    public boolean isFriOff() {
+        return friOff;
+    }
+
+    public void setFriOff(boolean friOff) {
+        this.friOff = friOff;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
 
     public int getInflatedMonths() {
         return inflatedMonths;

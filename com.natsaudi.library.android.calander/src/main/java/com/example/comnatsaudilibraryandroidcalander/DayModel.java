@@ -9,6 +9,7 @@ public class DayModel {
     private String arabicNo;
     private String week_value_arabic;
     private String week_value_english;
+    private int year;
 
 
     public DayModel(String week_value_arabic, String week_value_english) {
@@ -58,13 +59,7 @@ public class DayModel {
         return month_of_day;
     }
 
-    public DayModel(int dayId, int dayValue, String status, int month_of_day) {
 
-        this.dayId = dayId;
-        this.dayValue = dayValue;
-        this.status = status;
-        this.month_of_day = month_of_day;
-    }
 
     public void setStatus(String status) {
         this.status = status;
@@ -83,10 +78,5 @@ public class DayModel {
         return status;
     }
 
-    public DayModel(int dayId, int dayValue, String status) {
 
-        this.dayId = dayId;
-        this.dayValue = dayValue;
-        this.status = status;
-    }
 }
