@@ -2,6 +2,7 @@ package com.example.comnatsaudilibraryandroidcalander;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -64,7 +66,7 @@ public class MontsViewPagerAdapter extends PagerAdapter {
     private int getInflatedFragments() {
         Calendar c = Calendar.getInstance();
         int currentMonth = c.get(Calendar.MONTH);
-        int inflatedFraments = (12 - currentMonth) + 12;
+        int inflatedFraments = (12 - currentMonth);
         return inflatedFraments;
     }
 
@@ -112,6 +114,13 @@ public class MontsViewPagerAdapter extends PagerAdapter {
         WeekrecyclerView = (RecyclerView) itemView.findViewById(R.id.week_recycler_view_natsaudi);
         seperatorColor = (View) itemView.findViewById(R.id.seperator_color);
 
+
+        //setting margin for line
+        if (propertySetters.getLineLeftMargin() != 0) {
+            setMargins(seperatorColor, propertySetters.getLineLeftMargin(), propertySetters.getLineTopMargin(), propertySetters.getLineRightMargin(), propertySetters.getLintBottomMargin());
+
+
+        }
 
         //setting padding for week recycler
 
@@ -218,6 +227,7 @@ public class MontsViewPagerAdapter extends PagerAdapter {
                     }
                 }
             }
+            daysAdapter.notifyDataSetChanged();
         }
         if (position <= 11) {
             Calendar calendar = Calendar.getInstance();
@@ -293,14 +303,10 @@ public class MontsViewPagerAdapter extends PagerAdapter {
 
     private int getDays(int monthPosition) {
         int monthNo = 0;
-        if (monthPosition <= 11) {
-            Calendar c = Calendar.getInstance();
-            int currentMonth = c.get(Calendar.MONTH);
-            int startMonth = currentMonth + 1;
-            monthNo = startMonth + monthPosition;
-        } else {
-            monthNo=(monthPosition+1)-12;
-        }
+        Calendar c = Calendar.getInstance();
+        int currentMonth = c.get(Calendar.MONTH);
+        int startMonth = currentMonth + 1;
+        monthNo = startMonth + monthPosition;
         return monthNo;
 
     }
@@ -388,107 +394,56 @@ public class MontsViewPagerAdapter extends PagerAdapter {
         int current_year = calendar.get(Calendar.YEAR);
         month = getDays(position);
         int[] disable_days_array = new int[0];
-        if (year == current_year) {
-            switch (month) {
-                case 1:
-                    disable_days_array = propertySetters.getJANdays();
-                    break;
+        switch (month) {
+            case 1:
+                disable_days_array = propertySetters.getJANdays();
+                break;
 
-                case 2:
-                    disable_days_array = propertySetters.getFEBdays();
-                    break;
+            case 2:
+                disable_days_array = propertySetters.getFEBdays();
+                break;
 
-                case 3:
-                    disable_days_array = propertySetters.getMARday();
-                    break;
+            case 3:
+                disable_days_array = propertySetters.getMARday();
+                break;
 
-                case 4:
-                    disable_days_array = propertySetters.getAPRdays();
-                    break;
+            case 4:
+                disable_days_array = propertySetters.getAPRdays();
+                break;
 
-                case 5:
-                    disable_days_array = propertySetters.getMAYdays();
-                    break;
+            case 5:
+                disable_days_array = propertySetters.getMAYdays();
+                break;
 
-                case 6:
-                    disable_days_array = propertySetters.getJUNdays();
-                    break;
+            case 6:
+                disable_days_array = propertySetters.getJUNdays();
+                break;
 
-                case 7:
-                    disable_days_array = propertySetters.getJULdays();
-                    break;
+            case 7:
+                disable_days_array = propertySetters.getJULdays();
+                break;
 
-                case 8:
-                    disable_days_array = propertySetters.getAUGdays();
-                    break;
+            case 8:
+                disable_days_array = propertySetters.getAUGdays();
+                break;
 
-                case 9:
-                    disable_days_array = propertySetters.getSEPdays();
-                    break;
+            case 9:
+                disable_days_array = propertySetters.getSEPdays();
+                break;
 
-                case 10:
-                    disable_days_array = propertySetters.getOCTdays();
-                    break;
+            case 10:
+                disable_days_array = propertySetters.getOCTdays();
+                break;
 
-                case 11:
-                    disable_days_array = propertySetters.getNOVdays();
-                    break;
+            case 11:
+                disable_days_array = propertySetters.getNOVdays();
+                break;
 
-                case 12:
-                    disable_days_array = propertySetters.getDECdays();
-                    break;
+            case 12:
+                disable_days_array = propertySetters.getDECdays();
+                break;
 
-            }
-        } else if (year == (current_year + 1)) {
-            switch (month) {
-                case 13:
-                    disable_days_array = propertySetters.getJANdays();
-                    break;
 
-                case 14:
-                    disable_days_array = propertySetters.getFEBdays();
-                    break;
-
-                case 15:
-                    disable_days_array = propertySetters.getMARday();
-                    break;
-
-                case 16:
-                    disable_days_array = propertySetters.getAPRdays();
-                    break;
-
-                case 17:
-                    disable_days_array = propertySetters.getMAYdays();
-                    break;
-
-                case 18:
-                    disable_days_array = propertySetters.getJUNdays();
-                    break;
-
-                case 19:
-                    disable_days_array = propertySetters.getJULdays();
-                    break;
-
-                case 20:
-                    disable_days_array = propertySetters.getAUGdays();
-                    break;
-
-                case 21:
-                    disable_days_array = propertySetters.getSEPdays();
-                    break;
-
-                case 22:
-                    disable_days_array = propertySetters.getOCTdays();
-                    break;
-
-                case 23:
-                    disable_days_array = propertySetters.getNOVdays();
-                    break;
-
-                case 24:
-                    disable_days_array = propertySetters.getDECdays();
-                    break;
-            }
         }
         return disable_days_array;
     }
@@ -537,62 +492,50 @@ public class MontsViewPagerAdapter extends PagerAdapter {
     private String getsMonthNameA(int position) {
         switch (getDays(position)) {
             case 1:
-            case 13:
                 sMonthName = "يناير";
                 break;
             case 2:
-            case 14:
                 sMonthName = "فبراير";
                 break;
 
             case 3:
-            case 15:
                 sMonthName = "مارس";
                 break;
 
             case 4:
-            case 16:
                 sMonthName = "أبريل";
                 break;
 
             case 5:
-            case 17:
                 sMonthName = "مايو";
                 break;
 
             case 6:
-            case 18:
                 sMonthName = "يونيو";
                 break;
 
             case 7:
-            case 19:
                 sMonthName = "يوليو";
                 break;
 
             case 8:
-            case 20:
                 sMonthName = "أغسطس";
                 break;
 
             case 9:
-            case 21:
                 sMonthName = "ستمبر";
                 break;
 
             case 10:
-            case 22:
                 sMonthName = "اكتوبر";
                 break;
 
 
             case 11:
-            case 23:
                 sMonthName = "نوفمبر";
                 break;
 
             case 12:
-            case 24:
                 sMonthName = "ديسمبر";
                 break;
         }
@@ -657,8 +600,7 @@ public class MontsViewPagerAdapter extends PagerAdapter {
             Log.d("sun", "sun");
 
 
-        }
-        if (propertySetters.isSatOff()) {
+        } else if (propertySetters.isSatOff()) {
             do {
                 int wday = cal.get(Calendar.DAY_OF_WEEK);
                 if (wday == Calendar.SATURDAY) {
@@ -672,8 +614,7 @@ public class MontsViewPagerAdapter extends PagerAdapter {
             } while (cal.get(Calendar.MONTH) == month);
             Log.d("sat", "sat");
 
-        }
-        if (propertySetters.isMonOff()) {
+        } else if (propertySetters.isMonOff()) {
             do {
                 int wday = cal.get(Calendar.DAY_OF_WEEK);
                 if (wday == Calendar.MONDAY) {
@@ -687,8 +628,7 @@ public class MontsViewPagerAdapter extends PagerAdapter {
             } while (cal.get(Calendar.MONTH) == month);
             Log.d("mon", "mon");
 
-        }
-        if (propertySetters.isTuesOff()) {
+        } else if (propertySetters.isTuesOff()) {
             do {
                 int wday = cal.get(Calendar.DAY_OF_WEEK);
                 if (wday == Calendar.TUESDAY) {
@@ -702,8 +642,7 @@ public class MontsViewPagerAdapter extends PagerAdapter {
             } while (cal.get(Calendar.MONTH) == month);
             Log.d("tues", "tues");
 
-        }
-        if (propertySetters.isWendOff()) {
+        } else if (propertySetters.isWendOff()) {
             do {
                 int wday = cal.get(Calendar.DAY_OF_WEEK);
                 if (wday == Calendar.WEDNESDAY) {
@@ -715,8 +654,7 @@ public class MontsViewPagerAdapter extends PagerAdapter {
                 }
                 cal.add(Calendar.DAY_OF_YEAR, 1);
             } while (cal.get(Calendar.MONTH) == month);
-        }
-        if (propertySetters.isThOff()) {
+        } else if (propertySetters.isThOff()) {
             do {
                 int wday = cal.get(Calendar.DAY_OF_WEEK);
                 if (wday == Calendar.THURSDAY) {
@@ -728,8 +666,7 @@ public class MontsViewPagerAdapter extends PagerAdapter {
                 }
                 cal.add(Calendar.DAY_OF_YEAR, 1);
             } while (cal.get(Calendar.MONTH) == month);
-        }
-        if (propertySetters.isFriOff()) {
+        } else if (propertySetters.isFriOff()) {
             do {
                 int wday = cal.get(Calendar.DAY_OF_WEEK);
                 if (wday == Calendar.FRIDAY) {
@@ -741,7 +678,281 @@ public class MontsViewPagerAdapter extends PagerAdapter {
                 }
                 cal.add(Calendar.DAY_OF_YEAR, 1);
             } while (cal.get(Calendar.MONTH) == month);
+        } else if (propertySetters.isStFr()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.FRIDAY || wday == Calendar.SATURDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+            Log.d("sun", "sun");
+
+        } else if (propertySetters.isStMon()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.MONDAY || wday == Calendar.SATURDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+            Log.d("sun", "sun");
+
+
+        } else if (propertySetters.isStTu()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.TUESDAY || wday == Calendar.SATURDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+            Log.d("sun", "sun");
+
+        } else if (propertySetters.isStWed()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.WEDNESDAY || wday == Calendar.SATURDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+            Log.d("sun", "sun");
+
+        } else if (propertySetters.isStThrs()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.THURSDAY || wday == Calendar.SATURDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+            Log.d("sun", "sun");
+
+        } else if (propertySetters.isStSun()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.SUNDAY || wday == Calendar.SATURDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+            Log.d("sun", "sun");
+
+        } else if (propertySetters.isMonFri()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.MONDAY || wday == Calendar.FRIDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+
+
+        } else if (propertySetters.isMonSun()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.MONDAY || wday == Calendar.SUNDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+
+
+        } else if (propertySetters.isMonTues()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.MONDAY || wday == Calendar.TUESDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+
+
+        } else if (propertySetters.isMonWend()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.MONDAY || wday == Calendar.WEDNESDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+
+
+        } else if (propertySetters.isMonThrs()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.MONDAY || wday == Calendar.THURSDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+
+
+        } else if (propertySetters.isTuFri()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.TUESDAY || wday == Calendar.FRIDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+        } else if (propertySetters.isTuSun()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.TUESDAY || wday == Calendar.SUNDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+        } else if (propertySetters.isTuThrs()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.TUESDAY || wday == Calendar.THURSDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+        } else if (propertySetters.isTuWend()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.TUESDAY || wday == Calendar.WEDNESDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+        } else if (propertySetters.isWendFriday()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.WEDNESDAY || wday == Calendar.FRIDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+
+        } else if (propertySetters.isWendSun()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.WEDNESDAY || wday == Calendar.SUNDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+        } else if (propertySetters.isWendThrus()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.WEDNESDAY || wday == Calendar.THURSDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+        } else if (propertySetters.isThrusFri()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.FRIDAY || wday == Calendar.THURSDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
+        } else if (propertySetters.isThrusSun()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.SUNDAY || wday == Calendar.THURSDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
         }
-        daysAdapter.notifyDataSetChanged();
+
+
     }
+
+    private void setMargins(View view, int left, int top, int right, int bottom) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(left, top, right, bottom);
+            view.requestLayout();
+        }
+    }
+
 }

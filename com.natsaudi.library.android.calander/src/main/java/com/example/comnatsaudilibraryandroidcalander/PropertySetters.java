@@ -27,6 +27,203 @@ public class PropertySetters {
     private int weekLeftPadding;
     private int daysLeftPadding;
     private int daysRightPadding;
+    private String disableWeek;
+    private int lineTopMargin;
+    private int lintBottomMargin;
+    private int lineLeftMargin;
+    private int lineRightMargin;
+
+    public int getLineTopMargin() {
+        return lineTopMargin;
+    }
+
+    public void setLineTopMargin(int lineTopMargin) {
+        this.lineTopMargin = lineTopMargin;
+    }
+
+    public int getLintBottomMargin() {
+        return lintBottomMargin;
+    }
+
+    public void setLintBottomMargin(int lintBottomMargin) {
+        this.lintBottomMargin = lintBottomMargin;
+    }
+
+    public int getLineLeftMargin() {
+        return lineLeftMargin;
+    }
+
+    public void setLineLeftMargin(int lineLeftMargin) {
+        this.lineLeftMargin = lineLeftMargin;
+    }
+
+    public int getLineRightMargin() {
+        return lineRightMargin;
+    }
+
+    public void setLineRightMargin(int lineRightMargin) {
+        this.lineRightMargin = lineRightMargin;
+    }
+
+    public boolean isStSun() {
+        return stSun;
+    }
+
+    public void setStSun(boolean stSun) {
+        this.stSun = stSun;
+    }
+
+    public boolean isStMon() {
+        return stMon;
+    }
+
+    public void setStMon(boolean stMon) {
+        this.stMon = stMon;
+    }
+
+    public boolean isStTu() {
+        return stTu;
+    }
+
+    public void setStTu(boolean stTu) {
+        this.stTu = stTu;
+    }
+
+    public boolean isStWed() {
+        return stWed;
+    }
+
+    public void setStWed(boolean stWed) {
+        this.stWed = stWed;
+    }
+
+    public boolean isStThrs() {
+        return stThrs;
+    }
+
+    public void setStThrs(boolean stThrs) {
+        this.stThrs = stThrs;
+    }
+
+    public boolean isMonSun() {
+        return monSun;
+    }
+
+    public void setMonSun(boolean monSun) {
+        this.monSun = monSun;
+    }
+
+    public boolean isMonTues() {
+        return monTues;
+    }
+
+    public void setMonTues(boolean monTues) {
+        this.monTues = monTues;
+    }
+
+    public boolean isMonWend() {
+        return monWend;
+    }
+
+    public void setMonWend(boolean monWend) {
+        this.monWend = monWend;
+    }
+
+    public boolean isMonThrs() {
+        return monThrs;
+    }
+
+    public void setMonThrs(boolean monThrs) {
+        this.monThrs = monThrs;
+    }
+
+    public boolean isMonFri() {
+        return monFri;
+    }
+
+    public void setMonFri(boolean monFri) {
+        this.monFri = monFri;
+    }
+
+    public boolean isTuSun() {
+        return tuSun;
+    }
+
+    public void setTuSun(boolean tuSun) {
+        this.tuSun = tuSun;
+    }
+
+    public boolean isTuWend() {
+        return tuWend;
+    }
+
+    public void setTuWend(boolean tuWend) {
+        this.tuWend = tuWend;
+    }
+
+    public boolean isTuThrs() {
+        return tuThrs;
+    }
+
+    public void setTuThrs(boolean tuThrs) {
+        this.tuThrs = tuThrs;
+    }
+
+    public boolean isTuFri() {
+        return tuFri;
+    }
+
+    public void setTuFri(boolean tuFri) {
+        this.tuFri = tuFri;
+    }
+
+    public boolean isWendSun() {
+        return wendSun;
+    }
+
+    public void setWendSun(boolean wendSun) {
+        this.wendSun = wendSun;
+    }
+
+    public boolean isWendThrus() {
+        return wendThrus;
+    }
+
+    public void setWendThrus(boolean wendThrus) {
+        this.wendThrus = wendThrus;
+    }
+
+    public boolean isWendFriday() {
+        return wendFriday;
+    }
+
+    public void setWendFriday(boolean wendFriday) {
+        this.wendFriday = wendFriday;
+    }
+
+    public boolean isThrusSun() {
+        return thrusSun;
+    }
+
+    public void setThrusSun(boolean thrusSun) {
+        this.thrusSun = thrusSun;
+    }
+
+    public boolean isThrusFri() {
+        return thrusFri;
+    }
+
+    public void setThrusFri(boolean thrusFri) {
+        this.thrusFri = thrusFri;
+    }
+
+    public String getDisableWeek() {
+        return disableWeek;
+    }
+
+    public void setDisableWeek(String disableWeek) {
+        this.disableWeek = disableWeek;
+    }
 
     public int getWeekRightPadding() {
         return weekRightPadding;
@@ -110,6 +307,48 @@ public class PropertySetters {
     boolean wendOff;
     boolean thOff;
     boolean friOff;
+
+    boolean stFr;
+    boolean stSun;
+    boolean stMon;
+    boolean stTu;
+    boolean stWed;
+    boolean stThrs;
+
+    ///mon
+    boolean monSun;
+    boolean monTues;
+    boolean monWend;
+    boolean monThrs;
+    boolean monFri;
+
+    //tuesday
+
+    boolean tuSun;
+    boolean tuWend;
+    boolean tuThrs;
+    boolean tuFri;
+
+
+    //wend
+
+    boolean wendSun;
+    boolean wendThrus;
+    boolean wendFriday;
+
+    //thrus
+
+    boolean thrusSun;
+    boolean thrusFri;
+
+
+    public boolean isStFr() {
+        return stFr;
+    }
+
+    public void setStFr(boolean stFr) {
+        this.stFr = stFr;
+    }
 
     public boolean isSatOff() {
         return satOff;

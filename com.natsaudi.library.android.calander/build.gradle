@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-group ='com.github.NatSaudi'
+group ='com.github.reham-alatris'
 //ext {
 //    bintrayRepo = 'maven'
 //    bintrayName = 'com.natsaudi.library.android.calander'

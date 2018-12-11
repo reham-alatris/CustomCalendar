@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private CustomCalendarView custom;
-    int[] DecDisableDays = new int[]{3, 4, 5, 6};
+    int[] DecDisableDays = new int[]{14, 20, 5, 6};
     List<Integer> offDays = new ArrayList<>();
 
 
@@ -23,15 +23,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         custom = (CustomCalendarView) findViewById(R.id.custom);
-        custom.getPropertySetters().setFriOff(true);
-         custom.getPropertySetters().setSatOff(true);
+        custom.getPropertySetters().setStFr(true);
 
-        //    custom.getPropertySetters().setSunOff(true);
+        //   custom.getPropertySetters().setSunOff(true);
 
         custom.getPropertySetters().setSeperatorColor("#FFFFFF");
         custom.getPropertySetters().setCalendarContainerHeight(300);
         custom.getPropertySetters().setWeekColor("#FFFFFF");
-        custom.montsViewPagerAdapter.notifyDataSetChanged();
         custom.getPropertySetters().setDaysLeftPadding(50);
+        custom.getPropertySetters().setDECdays(DecDisableDays);
+
+
+        custom.montsViewPagerAdapter.notifyDataSetChanged();
+
     }
 }
