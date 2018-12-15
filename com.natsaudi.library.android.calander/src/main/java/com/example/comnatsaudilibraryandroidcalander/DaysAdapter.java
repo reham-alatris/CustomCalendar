@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Calendar;
 
 public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.MyViewHolder> {
@@ -21,8 +23,16 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.MyViewHolder> 
     PropertySetters propertySetters;
     Calendar c;
     int currentMonth, currentDay, row_index;
-    boolean isClicked = false;
 
+    public DaysAdapter() {
+    }
+
+    boolean isClicked = false;
+    public dayListener dayListener;
+
+    public void setDayListener(DaysAdapter.dayListener dayListener) {
+        this.dayListener = dayListener;
+    }
 
     public DaysAdapter(Context mContext, java.util.List<DayModel> words, PropertySetters propertySetters) {
         this.mContext = mContext;
@@ -120,8 +130,10 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.MyViewHolder> 
                     propertySetters.setSelectedMonth(dayModel.getMonth_of_day());
                     dayModel.setSelected(true);
                     row_index = position;
+            //        dayListener.getDate(String.valueOf(dayModel.getMonth_of_day()));
                     Log.v("selected day on click", String.valueOf(propertySetters.getSelectedDate()));
 
+                    EventBus.getDefault().post(new DayClickListner(dayModel));
 
                     notifyDataSetChanged();
                 }
@@ -177,8 +189,11 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.MyViewHolder> 
 
         } else {
             view.setRotationY(0);
-
         }
+    }
+
+    public interface dayListener {
+        public void getDate(String date);
     }
 
 }

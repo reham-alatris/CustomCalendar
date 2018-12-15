@@ -942,6 +942,18 @@ public class MontsViewPagerAdapter extends PagerAdapter {
                 }
                 cal.add(Calendar.DAY_OF_YEAR, 1);
             } while (cal.get(Calendar.MONTH) == month);
+        } else if (propertySetters.isSunFri()) {
+            do {
+                int wday = cal.get(Calendar.DAY_OF_WEEK);
+                if (wday == Calendar.SUNDAY || wday == Calendar.FRIDAY) {
+                    for (DayModel dayModel : dayModelList) {
+                        if (dayModel.getDayValue() == cal.get(Calendar.DAY_OF_MONTH)) {
+                            dayModel.setStatus("occupied");
+                        }
+                    }
+                }
+                cal.add(Calendar.DAY_OF_YEAR, 1);
+            } while (cal.get(Calendar.MONTH) == month);
         }
 
 

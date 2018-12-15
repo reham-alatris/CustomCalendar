@@ -14,6 +14,7 @@
         android:background="@color/calendar_bg"
         android:orientation="vertical"
         tools:context=".MonthFragment">
+
         <LinearLayout
             android:id="@+id/calendar_header_natsaudi"
             android:layout_width="match_parent"
@@ -48,10 +49,7 @@
                 android:layout_height="@dimen/calendar_arrow_height"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
-
-
         </LinearLayout>
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/week_recycler_view_natsaudi"
@@ -63,11 +61,11 @@
             android:scrollbars="horizontal" />
 
         <View
+            android:id="@+id/seperator_color"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="@dimen/calendar_days_seperator_bottom_margin"
             android:layout_marginTop="@dimen/calendar_days_seperator_top_margin"
-            android:id="@+id/seperator_color"
             android:background="@color/available_day_color" />
 
         <android.support.v7.widget.RecyclerView

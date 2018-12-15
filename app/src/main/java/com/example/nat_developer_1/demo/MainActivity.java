@@ -3,8 +3,15 @@ package com.example.nat_developer_1.demo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.comnatsaudilibraryandroidcalander.CustomCalendarView;
+import com.example.comnatsaudilibraryandroidcalander.DayClickListner;
+import com.example.comnatsaudilibraryandroidcalander.DaysAdapter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,6 +22,25 @@ public class MainActivity extends AppCompatActivity {
     private CustomCalendarView custom;
     int[] DecDisableDays = new int[]{14, 20, 5, 6};
     List<Integer> offDays = new ArrayList<>();
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(DayClickListner event) {
+        Toast.makeText(MainActivity.this, String.valueOf(event.getDayModel().getDayValue()), Toast.LENGTH_LONG).show();
+
+    }
 
 
     @Override
@@ -32,9 +58,13 @@ public class MainActivity extends AppCompatActivity {
         custom.getPropertySetters().setWeekColor("#FFFFFF");
         custom.getPropertySetters().setDaysLeftPadding(50);
         custom.getPropertySetters().setDECdays(DecDisableDays);
+        custom.getPropertySetters().setSelectedDayColor("#FFFFFF");
 
 
         custom.montsViewPagerAdapter.notifyDataSetChanged();
 
+
     }
+
+
 }

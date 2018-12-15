@@ -351,6 +351,15 @@ public class PropertySetters {
     boolean thrusSun;
     boolean thrusFri;
 
+    boolean sunFri;
+
+    public boolean isSunFri() {
+        return sunFri;
+    }
+
+    public void setSunFri(boolean sunFri) {
+        this.sunFri = sunFri;
+    }
 
     public boolean isStFr() {
         return stFr;
