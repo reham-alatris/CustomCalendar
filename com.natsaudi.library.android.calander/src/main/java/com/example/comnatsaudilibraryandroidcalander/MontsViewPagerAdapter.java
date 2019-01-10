@@ -114,6 +114,13 @@ public class MontsViewPagerAdapter extends PagerAdapter {
         WeekrecyclerView = (RecyclerView) itemView.findViewById(R.id.week_recycler_view_natsaudi);
         seperatorColor = (View) itemView.findViewById(R.id.seperator_color);
 
+        //Setting arrow direction
+
+        if (propertySetters.isSetArrowRTL()) {
+            next.setRotationY(180);
+            previous.setRotationY(180);
+        }
+
 
         //setting margin for line
         if (propertySetters.getLineLeftMargin() != 0) {

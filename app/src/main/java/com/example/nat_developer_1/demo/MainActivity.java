@@ -55,12 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
         custom.getPropertySetters().setSeperatorColor("#FFFFFF");
         custom.getPropertySetters().setCalendarContainerHeight(300);
-        custom.getPropertySetters().setWeekColor("#FFFFFF");
+        custom.getPropertySetters().setWeekColor("#EB943E");
         custom.getPropertySetters().setDaysLeftPadding(50);
         custom.getPropertySetters().setDECdays(DecDisableDays);
         custom.getPropertySetters().setSelectedDayColor("#FFFFFF");
-
-
+        custom.getPropertySetters().setSetArrowRTL(true);
         custom.montsViewPagerAdapter.notifyDataSetChanged();
 
 

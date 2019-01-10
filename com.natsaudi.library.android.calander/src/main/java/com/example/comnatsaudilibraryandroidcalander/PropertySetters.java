@@ -34,6 +34,15 @@ public class PropertySetters {
     private int lineRightMargin;
 
     private String selectedDayColor;
+    private boolean setArrowRTL;
+
+    public boolean isSetArrowRTL() {
+        return setArrowRTL;
+    }
+
+    public void setSetArrowRTL(boolean setArrowRTL) {
+        this.setArrowRTL = setArrowRTL;
+    }
 
     public String getSelectedDayColor() {
         return selectedDayColor;
