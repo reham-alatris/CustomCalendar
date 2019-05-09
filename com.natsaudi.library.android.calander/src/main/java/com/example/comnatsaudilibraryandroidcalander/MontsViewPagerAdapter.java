@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -204,6 +205,25 @@ public class MontsViewPagerAdapter extends PagerAdapter {
         c.set(Calendar.MONTH, getDays(position) - 1);
         int daysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         getArabicDays();
+
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        switch (dayOfWeek) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+
+            case 5:
+                break;
+            case 6:
+                break;
+        }
         for (int i = 1; i <= daysInMonth; i++) {
             dayModelList.add(new DayModel(1, i, "test", getDays(position), arabicDays.get(i - 1)));
             daysAdapter.notifyDataSetChanged();
@@ -972,6 +992,31 @@ public class MontsViewPagerAdapter extends PagerAdapter {
             p.setMargins(left, top, right, bottom);
             view.requestLayout();
         }
+    }
+
+    public void checkWeekStart(Date date) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        switch (dayOfWeek) {
+            case 0:
+
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+
+            case 5:
+                break;
+            case 6:
+                break;
+        }
+
     }
 
 }
