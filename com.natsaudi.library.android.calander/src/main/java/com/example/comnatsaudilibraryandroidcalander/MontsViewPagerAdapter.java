@@ -206,28 +206,85 @@ public class MontsViewPagerAdapter extends PagerAdapter {
         int daysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         getArabicDays();
 
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+
+        Date selectedDate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR)
+                , getDays(position) - 1, 1).getTime();
+        Log.d("Fg", String.valueOf(selectedDate));
+
+
+        Calendar cc = Calendar.getInstance();
+        cc.setTime(selectedDate);
+        int dayOfWeek = cc.get(Calendar.DAY_OF_WEEK);
+
+        Log.d("Fg", String.valueOf(dayOfWeek));
         switch (dayOfWeek) {
             case 0:
                 break;
             case 1:
+                Calendar previousMonthCal1 = Calendar.getInstance();
+                previousMonthCal1.set(Calendar.MONTH, getDays(position) - 2);
+                int daysInPrevious1 = previousMonthCal1.getActualMaximum(Calendar.DAY_OF_MONTH);
+                Log.d("Fg", String.valueOf(daysInPrevious1));
+                dayModelList.add(new DayModel(1, daysInPrevious1, "occupied", getDays(position), arabicDays.get(daysInPrevious1 - 1)));
                 break;
             case 2:
+                Calendar previousMonthCal2 = Calendar.getInstance();
+                previousMonthCal2.set(Calendar.MONTH, getDays(position) - 2);
+                int daysInPrevious2 = previousMonthCal2.getActualMaximum(Calendar.DAY_OF_MONTH);
+                Log.d("Fg", String.valueOf(daysInPrevious2));
+                dayModelList.add(new DayModel(1, daysInPrevious2 - 1, "occupied", getDays(position), arabicDays.get(daysInPrevious2 - 2)));
+                dayModelList.add(new DayModel(1, daysInPrevious2, "occupied", getDays(position), arabicDays.get(daysInPrevious2 - 1)));
                 break;
             case 3:
+                Calendar previousMonthCal3 = Calendar.getInstance();
+                previousMonthCal3.set(Calendar.MONTH, getDays(position) - 2);
+                int daysInPrevious3 = previousMonthCal3.getActualMaximum(Calendar.DAY_OF_MONTH);
+                Log.d("Fg", String.valueOf(daysInPrevious3));
+
+                dayModelList.add(new DayModel(1, daysInPrevious3 - 2, "occupied", getDays(position), arabicDays.get(daysInPrevious3 - 3)));
+                dayModelList.add(new DayModel(1, daysInPrevious3 - 1, "occupied", getDays(position), arabicDays.get(daysInPrevious3 - 2)));
+                dayModelList.add(new DayModel(1, daysInPrevious3, "occupied", getDays(position), arabicDays.get(daysInPrevious3 - 1)));
                 break;
             case 4:
+
+                Calendar previousMonthCal = Calendar.getInstance();
+                previousMonthCal.set(Calendar.MONTH, getDays(position) - 2);
+                int daysInPrevious = previousMonthCal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                dayModelList.add(new DayModel(1, daysInPrevious - 3, "occupied", getDays(position), arabicDays.get(daysInPrevious - 4)));
+                dayModelList.add(new DayModel(1, daysInPrevious - 2, "occupied", getDays(position), arabicDays.get(daysInPrevious - 3)));
+                dayModelList.add(new DayModel(1, daysInPrevious - 1, "occupied", getDays(position), arabicDays.get(daysInPrevious - 2)));
+                dayModelList.add(new DayModel(1, daysInPrevious, "occupied", getDays(position), arabicDays.get(daysInPrevious - 1)));
                 break;
 
             case 5:
+                Calendar previousMonthCal5 = Calendar.getInstance();
+                previousMonthCal5.set(Calendar.MONTH, getDays(position) - 2);
+                int daysInPrevious5 = previousMonthCal5.getActualMaximum(Calendar.DAY_OF_MONTH);
+                dayModelList.add(new DayModel(1, daysInPrevious5 - 4, "occupied", getDays(position), arabicDays.get(daysInPrevious5 - 5)));
+                dayModelList.add(new DayModel(1, daysInPrevious5 - 3, "occupied", getDays(position), arabicDays.get(daysInPrevious5 - 4)));
+                dayModelList.add(new DayModel(1, daysInPrevious5 - 2, "occupied", getDays(position), arabicDays.get(daysInPrevious5 - 3)));
+                dayModelList.add(new DayModel(1, daysInPrevious5 - 1, "occupied", getDays(position), arabicDays.get(daysInPrevious5 - 2)));
+                dayModelList.add(new DayModel(1, daysInPrevious5, "occupied", getDays(position), arabicDays.get(daysInPrevious5 - 1)));
                 break;
             case 6:
+                Calendar previousMonthCal6 = Calendar.getInstance();
+                previousMonthCal6.set(Calendar.MONTH, getDays(position) - 2);
+                int daysInPrevious6 = previousMonthCal6.getActualMaximum(Calendar.DAY_OF_MONTH);
+                dayModelList.add(new DayModel(1, daysInPrevious6 - 5, "occupied", getDays(position), arabicDays.get(daysInPrevious6 - 6)));
+                dayModelList.add(new DayModel(1, daysInPrevious6 - 4, "occupied", getDays(position), arabicDays.get(daysInPrevious6 - 5)));
+                dayModelList.add(new DayModel(1, daysInPrevious6 - 3, "occupied", getDays(position), arabicDays.get(daysInPrevious6 - 4)));
+                dayModelList.add(new DayModel(1, daysInPrevious6 - 2, "occupied", getDays(position), arabicDays.get(daysInPrevious6 - 3)));
+                dayModelList.add(new DayModel(1, daysInPrevious6 - 1, "occupied", getDays(position), arabicDays.get(daysInPrevious6 - 2)));
+                dayModelList.add(new DayModel(1, daysInPrevious6, "occupied", getDays(position), arabicDays.get(daysInPrevious6 - 1)));
                 break;
         }
+
         for (int i = 1; i <= daysInMonth; i++) {
             dayModelList.add(new DayModel(1, i, "test", getDays(position), arabicDays.get(i - 1)));
-            daysAdapter.notifyDataSetChanged();
         }
+        daysAdapter.notifyDataSetChanged();
+
+        Log.d("ff", String.valueOf(dayModelList));
 
 
         if (setArabic()) {

@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         custom.getPropertySetters().setDaysLeftPadding(50);
         custom.getPropertySetters().setDECdays(DecDisableDays);
         custom.getPropertySetters().setSelectedDayColor("#FFFFFF");
+        custom.getPropertySetters().setArabicSupport(true);
+        custom.setRotationY(180);
 
 
         custom.montsViewPagerAdapter.notifyDataSetChanged();
