@@ -1,21 +1,20 @@
+ # CustomCalendar
+ 
+Android Library that is  is a fully customized and Alows you to
+Support Arabic and English,  Disable days in any month and previous days in the current month and certain day in Week and inflate certain months from the current month according to the preference
 
+## Installing
 
-
-CustomCalendar is a fully customized calendar that 
-
--support Arabic and English
-
--disable days in any month and previous days in the current month
-
--inflate certain months from the current month according to the preference
-
-Step 1. Add the JitPack repository to your build file 
+Add the JitPack repository to your build file 
 
 in the root build.gradle 
 
-allprojects { repositories { ... maven { url 'https://jitpack.io' } } }
+```
+ allprojects { repositories { ... maven { url 'https://jitpack.io' } } }
+ 
+```
 
-Step 2. Add the dependency
+ Add the dependency
 
 	dependencies {
 	        implementation 'com.github.NatSaudi:NatSaudiCalendar:v1'
@@ -23,14 +22,16 @@ Step 2. Add the dependency
 
 
 first : declare the view in the layout XML
-
+```xml
   <com.example.comnatsaudilibraryandroidcalander.CustomCalendarView
         android:layout_width="match_parent"
         android:id="@+id/custom"
         android:layout_height="wrap_content">
     </com.example.comnatsaudilibraryandroidcalander.CustomCalendarView>
-    
+```
+
 second : refer to it's ID in Activity JAVA
+```java
 
 custom = (CustomCalendarView) findViewById(R.id.custom);
 
@@ -180,4 +181,7 @@ custom.montsViewPagerAdapter.notifyDataSetChanged();
 
 //getting user selected date
 String date=  custom.getPropertySetters().getSelectedDate();
+
+```
+
 
